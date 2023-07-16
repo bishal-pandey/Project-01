@@ -2,6 +2,8 @@ import sys
 import os
 from  src.exception import CustomException
 from src.logger import logging
+from src.components.data_transformation import DataTransformation, DataTransformConfig
+
 import pandas as pd
 import numpy as np
 
@@ -43,4 +45,7 @@ class DataInjection:
 
 if __name__ == "__main__":
     obj = DataInjection()
-    obj.initiate_data_injection()
+    train_data, test_data = obj.initiate_data_injection()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
