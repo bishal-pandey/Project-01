@@ -66,11 +66,14 @@ class DataTransformation:
             tranf_X_train_data = transformer_object.fit_transform(X_train_data)
             tranf_X_test_data = transformer_object.fit_transform(X_test_data)
 
+            train_arr = np.c_[tranf_X_train_data, np.array(train_target_data)]
+            test_arr = np.c_[tranf_X_test_data, np.array(test_target_data)]
+
             save_obj(file_path=self.data_transform_config.preprocessor_file_path,obj=transformer_object)
 
             return (
-                tranf_X_train_data,
-                tranf_X_test_data,
+                train_arr,
+                test_arr,
                 self.data_transform_config.preprocessor_file_path
 
             )
