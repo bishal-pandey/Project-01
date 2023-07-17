@@ -41,17 +41,43 @@ class ModelTrainer:
                                                 test_data[:,:-1], test_data[:,-1])
             
             models = {
-                "LinearRegression":LinearRegression(),
-                "Lasso":Lasso(),
-                "Ridge":Ridge(),
-                "SVR":SVR(),
+                
+                # "Lasso":Lasso(),
+                # "Ridge":Ridge(),
+                # "SVR":SVR(),
                 "Decision Tree":DecisionTreeRegressor(),
-                "k-Neighbour":KNeighborsRegressor(),
                 "Random Forest":RandomForestRegressor(),
+                "LinearRegression":LinearRegression(),
+                # "k-Neighbour":KNeighborsRegressor(),
+                
                 "Xgboost":XGBRegressor(),
             }
+            params = {
+                "Decision Tree": {
+                    'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
+                    # 'splitter':['best','random'],
+                    # 'max_features':['sqrt','log2'],
+                },
+                "Random Forest":{
+                    # 'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
+                 
+                    # 'max_features':['sqrt','log2',None],
+                    'n_estimators': [8,16,32,64,128,256]
+                },
+                
+                "Linear Regression":{},
+                "XGBRegressor":{
+                    'learning_rate':[.1,.01,.05,.001],
+                    'n_estimators': [8,16,32,64,128,256]
+                },
+                
+                
+                
+                
+            }
+            
             logging.info("model Evalution begin")
-            result = model_evalute(x_train = X_train, y_train = y_train,x_test = X_test, y_test = y_test, models=models)
+            result = model_evalute(x_train = X_train, y_train = y_train,x_test = X_test, y_test = y_test, models=models,params = params)
 
             best_models_score = max(sorted(result.values()))
             
