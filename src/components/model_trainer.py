@@ -90,8 +90,8 @@ class ModelTrainer:
             
             logging.info("Best model found")
             
-            save_obj(file_path=self.model_trainer_config, obj=best_model)
-            logging.info("best model is save")
+            save_obj(file_path=self.model_trainer_config.trained_model_file_path, obj=best_model)
+            logging.info(f"best model is save {self.model_trainer_config.trained_model_file_path}")
 
 
             predicted = best_model.predict(X_test)
@@ -102,3 +102,4 @@ class ModelTrainer:
 
         except Exception as e:
             raise CustomException(e, sys)
+        
